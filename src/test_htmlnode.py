@@ -11,7 +11,10 @@ class TestHTMLNode(unittest.TestCase):
     def test_only_value(self):
         #should return just a value
         node= HTMLNode(value="Howdy")
+        self.assertEqual(node.tag,None)
         self.assertEqual(node.value,"Howdy")
+
+        
     def test_no_props(self):
         node= HTMLNode("<head>","text_inside",["child","kids"])
         self.assertEqual(node.props,None)
