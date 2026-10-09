@@ -21,7 +21,7 @@ class TestTextNode(unittest.TestCase):
         #configure node 1, then return node1.link text and check it equals the input?
     def test_not_type(self):
         with self.assertRaises(Exception) as cm:
-            node= TextNode(2,"cracker",2)
+            node= TextNode(2,TextType.BIG_LETTA,2)
             html_node= text_node_to_html_node(node)
     def test_text_PLAIN(self):
         node = TextNode("This is a text node", TextType.PLAIN)
