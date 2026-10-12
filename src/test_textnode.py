@@ -1,5 +1,5 @@
 import unittest
-from textnode import TextNode, TextType,text_node_to_html_node
+from textnode import TextNode, TextType,text_node_to_html_node, extract_markdown_images, extract_markdown_links
 
 
 class TestTextNode(unittest.TestCase):
@@ -54,6 +54,23 @@ class TestTextNode(unittest.TestCase):
         html_node=text_node_to_html_node(node)
         self.assertEqual(html_node.tag,"b")
         self.assertEqual(html_node.value,"bold and brash")
+
+    def test_Markdown_Links(self):
+        result=extract_markdown_links("I am a link text[to the moon](moon.com)")
+        self.assertListEqual(result,[("to the moon","moon.com")])
+
+    def test_extract_markdown_images(self):
+        matches = extract_markdown_images(
+            "This is text with an ![image](https://i.imgur.com/zjjcJKZ.png)"
+        )
+        self.assertListEqual([("image", "https://i.imgur.com/zjjcJKZ.png")], matches)
+    def test_two_links(self):
+        matches=extract_markdown_links("this is text with [one](link.com) and a [second](link.org)")
+        self.assertListEqual(matches,[("one","link.com"),("second","link.org")])
+    def test_two_images(self):
+        matches= extract_markdown_images("enjoy the site: ![image of dog](dogs.com) we also have other animals ![image of a cat](cats.com)")
+        self.assertListEqual(matches,[("image of dog","dogs.com"),("image of a cat","cats.com")])
+    
       
     
         
