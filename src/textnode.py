@@ -7,7 +7,7 @@ class TextType(Enum):
     PLAIN="plain" #
     BOLD="bold"  #**
     ITALIC="italic" # _
-    CODE="code" # '
+    CODE="code" # `
     LINK="link" # 
     IMAGE="image" #
 

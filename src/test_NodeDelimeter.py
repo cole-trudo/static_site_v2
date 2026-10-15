@@ -1,6 +1,6 @@
 import unittest
 from textnode import TextNode, TextType
-from NodeDelimeter import split_nodes_delimiter,split_nodes_image, split_nodes_link
+from NodeDelimeter import split_nodes_delimiter,split_nodes_image, split_nodes_link,text_to_textnodes
 
 
 class TestNodeDelimeter(unittest.TestCase):
@@ -38,6 +38,26 @@ class TestNodeDelimeter(unittest.TestCase):
         mrkdown=[TextNode("[only a link](toyou.com)",TextType.PLAIN)]
         extracted=split_nodes_link(mrkdown)
         self.assertListEqual(extracted,[TextNode("only a link",TextType.LINK,"toyou.com")])
+
+    def test_textToTextNodes(self):
+        mrkdown="This is **text** with an _italic_ word and a `code block` and an ![obi wan image](https://i.imgur.com/fJRm4Vk.jpeg) and a [link](https://boot.dev)"
+        result=text_to_textnodes(mrkdown)
+
+        self.assertListEqual(result,
+            [
+    TextNode("This is ", TextType.PLAIN),
+    TextNode("text", TextType.BOLD),
+    TextNode(" with an ", TextType.PLAIN),
+    TextNode("italic", TextType.ITALIC),
+    TextNode(" word and a ", TextType.PLAIN),
+    TextNode("code block", TextType.CODE),
+    TextNode(" and an ", TextType.PLAIN),
+    TextNode("obi wan image", TextType.IMAGE, "https://i.imgur.com/fJRm4Vk.jpeg"),
+    TextNode(" and a ", TextType.PLAIN),
+    TextNode("link", TextType.LINK, "https://boot.dev"),
+        ]
+        )
+
 
 
         
