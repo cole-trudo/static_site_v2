@@ -5,7 +5,7 @@ class BlockType(Enum):
     PARAGRAPH="paragraph"
     HEADING="heading"
     CODE="code"
-    QUOTE="qoute"
+    QUOTE="quote"
     UNORDERED_LIST="unordered_list"
     ORDERED_LIST="ordered_list"
 
@@ -25,14 +25,6 @@ def block_to_block_type(block):
         if all(line.startswith(f"{i}. ") for i, line in enumerate(lines, 1)):
             return BlockType.ORDERED_LIST
     return BlockType.PARAGRAPH
-
-    
-
-
-
-
-
-
 
 def markdown_to_blocks(markdown):
 
