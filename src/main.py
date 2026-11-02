@@ -1,7 +1,13 @@
 from textnode import TextNode,TextType
-
+from CopyStatic import CopyStaticFiles
+import shutil
+import os
 def main():
-    Dummy=TextNode("poop","link","poop.com")
-    print (repr(Dummy))
+    public_dir="./public"
+    if os.path.exists(public_dir):
+        shutil.rmtree(public_dir)
+    os.mkdir(public_dir)
+    
+    CopyStaticFiles("./static","./public")
 if __name__=='__main__':
     main()
