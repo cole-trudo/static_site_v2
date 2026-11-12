@@ -5,7 +5,7 @@ from generate_page import generate_page
 
 
 
-def  generate_pages_recursive(dir_path_content, template_path, dest_dir_path):
+def  generate_pages_recursive(dir_path_content, template_path, dest_dir_path,basepath):
 
 
         copiedList=[]
@@ -18,10 +18,10 @@ def  generate_pages_recursive(dir_path_content, template_path, dest_dir_path):
 
                 
 
-                generate_page(full_source_path,template_path,pathlib.Path(dest_path).with_suffix(".html"))
+                generate_page(full_source_path,template_path,pathlib.Path(dest_path).with_suffix(".html"),basepath)
 
             if os.path.isdir(full_source_path):
-                 generate_pages_recursive(full_source_path, template_path, dest_path)
+                 generate_pages_recursive(full_source_path, template_path, dest_path,basepath)
 
                  
                 
